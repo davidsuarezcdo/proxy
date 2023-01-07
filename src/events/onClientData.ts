@@ -1,12 +1,13 @@
 import * as net from "net";
-import { getConfigByDomain, parseRequestHeaders } from "../utils";
+import { ConfigUtils } from "../utils/config";
+import { RequestUtils } from "../utils/request";
 
 export function onClientData(request: Buffer, clientSocketRequest: net.Socket): void {
-  const { host } = parseRequestHeaders(request);
+  const { host } = RequestUtils.parse(request);
   let clientResponse: net.Socket = new net.Socket();
   clientResponse.on("close", () => clientResponse.destroy());
 
-  const config = getConfigByDomain(host);
+  const config = ConfigUtils.getByDomain(host);
 
   if (!config) {
     clientSocketRequest.destroy();
