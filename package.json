@@ -12,8 +12,8 @@
     "postinstall": "npm run build",
     "build": "tsc",
     "prebuild": "rimraf build",
-    "start:proxy": "node build/handler.js",
-    "start:proxy:dev": "ts-node src/handler.ts"
+    "start": "node build/index.js",
+    "start:dev": "ts-node src/index.ts"
   },
   "dependencies": {
     "express": "^4.18.2"
